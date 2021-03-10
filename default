@@ -2,36 +2,27 @@ server {
     listen   80; ## listen for ipv4; this line is default and implied
     listen   [::]:80 default ipv6only=on; ## listen for ipv6
 
-    root /var/www/site/public;
-    index index.php index.html index.htm;
-
     # Make site accessible from http://localhost/
     server_name _;
 
-    # Disable sendfile as per https://docs.vagrantup.com/v2/synced-folders/virtualbox.html
-    sendfile off;
+    root /var/www/site/public;
+    index index.php index.html index.htm;
 
-    client_max_body_size 100m;
+    charset utf-8;
 
-    # Security - Hide nginx version number in error pages and Server header
-    server_tokens off;
+    location / {
+        try_files $uri $uri/ /index.php$is_args$args;
+    }
+
 
     # Add stdout logging
     error_log /var/log/nginx/access.log error;
     #access_log /var/log/nginx/error.log error;
 
-    location / {
-        # First attempt to serve request as file, then
-        # as directory, then fall back to index.html
-        try_files $uri $uri/ =404;
-    }
+    # Disable sendfile as per https://docs.vagrantup.com/v2/synced-folders/virtualbox.html
+    sendfile off;
 
-    # redirect server error pages to the static page /50x.html
-    #
-    error_page   500 502 503 504  /50x.html;
-    location = /50x.html {
-        root   /usr/share/nginx/html;
-    }
+    client_max_body_size 100m;
 
     # pass the PHP scripts to FastCGI server listening on socket
     #
@@ -42,20 +33,12 @@ server {
         fastcgi_index index.php;
         include fastcgi_params;
         fastcgi_param SCRIPT_FILENAME $document_root$fastcgi_script_name;
-        fastcgi_param PATH_INFO $fastcgi_path_info;
         fastcgi_intercept_errors off;
         fastcgi_buffer_size 16k;
         fastcgi_buffers 4 16k;
     }
 
-    location ~* \.(jpg|jpeg|gif|png|css|js|ico|xml)$ {
-            expires           5d;
-    }
-
-    # deny access to . files, for security
-    #
-    location ~ /\. {
-            log_not_found off;
-            deny all;
+    location ~ /\.ht {
+        deny all;
     }
 }

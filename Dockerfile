@@ -9,6 +9,8 @@ ENV NVM_DIR=/root/.nvm
 ENV PHP73_CONF /etc/php/7.3/fpm/php.ini
 ENV FPM73_CONF /etc/php/7.3/fpm/pool.d/www.conf
 
+ENV DEBIAN_FRONTEND=noninteractive 
+
 ENV NVM_VERSION v0.35.0
 
 RUN apt-get update
