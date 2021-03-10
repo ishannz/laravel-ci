@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 
 LABEL maintainer="Ishan Jayamannne <ishanjmails@gmail.com>"
 LABEL version="1.0"
-LABEL description="Laravel Circle ci php7.3-fpm with node 10"
+LABEL description="Laravel Circle ci php7.3-fpm with node 12"
 LABEL "com.example.vendor"="Ishannz"
 
 ENV NVM_DIR=/root/.nvm
@@ -96,10 +96,10 @@ RUN mkdir -p $NVM_DIR && \
 RUN . ~/.nvm/nvm.sh && \
         nvm install lts/carbon && \
         nvm alias default lts/carbon && \
-        nvm install 12 && \
+        nvm install 12.21.0 && \
         nvm install 10 && \
         nvm use 10 && \
-        nvm alias default 10.20.1
+        nvm alias default 12.21.0
 
 # Install Composer
 RUN php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');" && \

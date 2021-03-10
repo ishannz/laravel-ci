@@ -3,7 +3,7 @@ Includes
 
  * PHP 7.3 (ubuntu 18.04 + ondrej ppa)
  * nginx
- * NVM with node 10, 12 (Default: 10)
+ * NVM with node 10, 12 (Default: 12)
  * Latest Chrome
  * yarn
  
@@ -51,8 +51,8 @@ jobs:
           paths:
             - vendor
 
-      # Change node version to 10
-      - run: nvm use 10
+      # Change node version to 12
+      - run: nvm use 12
 
       # NPM Cache + Installation
       - restore_cache:
