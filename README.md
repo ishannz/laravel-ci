@@ -1,7 +1,7 @@
 Includes
 ========================
 
- * PHP 7.3 (ubuntu 18.04 + ondrej ppa)
+ * PHP 7.4 (ubuntu 12.04 + ondrej ppa)
  * nginx
  * NVM with node 10, 12 (Default: 12)
  * Latest Chrome
@@ -33,7 +33,7 @@ jobs:
       - checkout
 
       # Restart php, Nginx and Xvfb
-      - run: service php7.3-fpm restart
+      - run: service php7.4-fpm restart
       - run: service nginx restart
       - run:
           command: Xvfb :99 -screen 0 1280x1024x24
